@@ -1,0 +1,32 @@
+package com.watcha.data.model
+
+data class TrackResponse @JvmOverloads constructor(
+    var artistId: Int = 0,
+    var artistName: String = "",
+    var artistViewUrl: String = "",
+    var artworkUrl100: String = "",
+    var artworkUrl60: String = "",
+    var collectionCensoredName: String = "",
+    var collectionExplicitness: String = "",
+    var collectionId: Int = 0,
+    var collectionName: String = "",
+    var collectionPrice: Double = 0.0,
+    var collectionViewUrl: String = "",
+    var country: String = "",
+    var currency: String = "",
+    var discCount: Int = 0,
+    var discNumber: Int = 0,
+    var kind: String = "",
+    var previewUrl: String = "",
+    var primaryGenreName: String = "",
+    var trackCensoredName: String = "",
+    var trackCount: Int = 0,
+    var trackExplicitness: String = "",
+    var trackId: Int = 0,
+    var trackName: String = "",
+    var trackNumber: Int = 0,
+    var trackPrice: Double = 0.0,
+    var trackTimeMillis: Int = 0,
+    var trackViewUrl: String = "",
+    var wrapperType: String = ""
+)
