@@ -1,4 +1,4 @@
-package com.watcha.data.common
+package com.watcha.itunes.common
 
 import android.view.View
 import java.util.concurrent.atomic.AtomicBoolean

@@ -46,7 +46,7 @@ dependencies {
     // android
     implementation libs.bundles.androidx
     implementation libs.android.material
-    implementation libs.databinding
+//    implementation libs.databinding
 
     // hilt
     implementation libs.hilt

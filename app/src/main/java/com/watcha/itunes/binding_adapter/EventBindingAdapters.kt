@@ -2,7 +2,7 @@ package com.watcha.itunes.binding_adapter
 
 import android.view.View
 import androidx.databinding.BindingAdapter
-import com.watcha.data.common.OnSingleClickListener
+import com.watcha.itunes.common.OnSingleClickListener
 
 // 클릭 이벤트 관련 바인딩
 object EventBindingAdapters {

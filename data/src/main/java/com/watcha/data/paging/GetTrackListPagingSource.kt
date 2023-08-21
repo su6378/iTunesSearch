@@ -1,6 +1,5 @@
 package com.watcha.data.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.watcha.data.api.SearchApi
@@ -27,7 +26,7 @@ internal class GetTrackListPagingSource(
             delay(500)
             // 키 값이 없을 경우 기본값을 사용함
             val currentPage = params.key ?: 0
-            // 데이터를 제공하는 인스턴스의 메소드 사용
+            // 데이터를 제공하는 인스턴스의 메소드 사용 limit는
             val response = searchApi.getTrackList("greenday", "song", 30, currentPage)
             val data = response.body()?.tracks ?: emptyList()
             val responseData = mutableListOf<Track>()
@@ -43,7 +42,7 @@ internal class GetTrackListPagingSource(
                 if (responseData.isEmpty()) {
                     null
                 } else {
-                    currentPage + 1
+                    currentPage + 30
                 }
 
             LoadResult.Page(

@@ -1,4 +1,4 @@
-package com.watcha.data.common
+package com.watcha.itunes.common
 
 /*
  *  Copyright 2017 Google Inc.

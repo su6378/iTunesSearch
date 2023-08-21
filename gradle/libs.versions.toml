@@ -4,18 +4,20 @@
 kotlin = "1.8.0"
 
 # androidx
-androidx-core = "1.7.0"
-androidx-appcompat = "1.5.1"
-androidx-test-junit = "1.1.4"
-androidx-test-espresso = "3.5.0"
-androidx_fragment_version = "1.5.0"
-androidx_lifecycle_extension_version = "2.2.0"
-databinding = "7.3.1"
+androidxCore = "1.7.0"
+androidxAppcompat = "1.5.1"
+androidxTestJunit = "1.1.4"
+androidxTestEspresso = "3.5.0"
+androidxFragment = "1.5.0"
+androidxLifecycleExtension = "2.2.0"
+androidxRoom = "2.5.0"
+androidxPaging = "3.1.1"
+#databinding_version = "7.3.1"
 
 # android
-android-material = "1.7.0"
-android-library = "7.3.0"
-android-application = "7.3.0"
+androidMaterial = "1.7.0"
+androidLibrary = "7.3.0"
+androidApplication = "7.3.0"
 
 # junit
 junit = "4.13.2"
@@ -28,39 +30,37 @@ retrofit = "2.9.0"
 okhttp3 = "4.10.0"
 
 # glide
-glide_version = "4.13.0"
+glide = "4.13.0"
 
 # lottie
-lottie_version = "5.2.0"
-
-# paging
-paging_version = "3.1.1"
+lottie = "5.2.0"
 
 ## 사용 라이브러리 (module = 사용 라이브러리, version.ref = 사용버전(위에서 작성한 버전))
 [libraries]
 
 # android core (안드로이드 기본 제공 라이브러리)
-androidx_core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
-androidx_appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
-android_material = { module = "com.google.android.material:material", version.ref = "android-material" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
+android-material = { module = "com.google.android.material:material", version.ref = "androidMaterial" }
+
+# android fragment ktx (Activity와 Fragment간 viewModel 공유 쉽게 구현 ex) activityViewModels())
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxFragment" }
 
 # junit (테스트 도구)
 junit = { module = "junit:junit", version.ref = "junit" }
-android_test_junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
-android_test_espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
+android-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidxTestJunit" }
+android-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidxTestEspresso" }
 
 # hilt (DI)
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt_compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
 # Jetpack Databinding (모델과 뷰 사이의 데이터 바인딩)
-databinding = { module = "androidx.databinding:databinding-runtime", version.ref = "databinding" }
-databinding_compiler = { module = "com.android.databinding:compiler", version.ref = "databinding" }
-
-androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx_fragment_version" }
+#databinding = { module = "androidx.databinding:databinding-runtime", version.ref = "databinding_version" }
+#databinding_compiler = { module = "com.android.databinding:compiler", version.ref = "databinding_version" }
 
 # Jetpack ViewModel (생명주기에 따른 관리)
-androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidx_lifecycle_extension_version" }
+androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidxLifecycleExtension" }
 
 # Retrofit (Http 통신 라이브러리)
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -73,24 +73,28 @@ okhttp3-urlconnection = { module = "com.squareup.okhttp3:okhttp-urlconnection", 
 okhttp3-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3" }
 
 # Glide (이미지 프로세스 라이브러리)
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide_version" }
-glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide_version" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 
-# lottie
-lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie_version" }
+# lottie (안드로이드 앱에서 Lottie 애니메이션 사용 라이브러리)
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 
-# paging
-paging = { module = "androidx.paging:paging-runtime", version.ref = "paging_version" }
+# paging (안드로이드 pagnation을 쉽게 구현할 수 있게 해주는 라이브러리)
+paging = { module = "androidx.paging:paging-runtime", version.ref = "androidxPaging" }
+
+# room (SQLite 추상화 라이브러리, 로컬 데이터베이스에 데이터를 저장)
+room = { module = "androidx.room:room-runtime", version.ref = "androidxRoom"}
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom"}
 
 ## bundles는 여러 라이브러리를 한가지로 묶기 위함
 [bundles]
-androidx = ["androidx_core", "androidx_appcompat", "androidx-fragment-ktx", "androidx-lifecycle-extensions"]
+androidx = ["androidx-core", "androidx-appcompat", "androidx-fragment-ktx", "androidx-lifecycle-extensions"]
 retrofit-bundles = ["retrofit", "retrofit-gson-converter"]
 okhttp3-bundles = ["okhttp3", "okhttp3-interceptor", "okhttp3-urlconnection", "okhttp3-logging"]
 
 ## 안드로이드 플러그인 (프로젝트 단위의 gradle에 적용)
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-android_library = { id = "com.android.library", version.ref = "android-library" }
-android_application = { id = "com.android.application", version.ref = "android-application" }
+android-library = { id = "com.android.library", version.ref = "androidLibrary" }
+android-application = { id = "com.android.application", version.ref = "androidApplication" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
