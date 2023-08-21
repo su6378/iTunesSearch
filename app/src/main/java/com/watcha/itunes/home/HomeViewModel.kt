@@ -3,6 +3,7 @@ package com.watcha.itunes.home
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -21,12 +22,14 @@ class HomeViewModel @Inject constructor(
     private val getTrackListUseCase: GetTrackListUseCase
 ) : BaseViewModel(), HomeEventHandler {
 
-    private val _trackList = MutableLiveData<PagingData<DomainTrackResponse>>()
-    val trackList: LiveData<PagingData<DomainTrackResponse>>
-        get() = _trackList
+    private val filter: MutableLiveData<Int> = MutableLiveData()
 
-    fun getTrackList(): Flow<PagingData<DomainTrackResponse>> {
-        return getTrackListUseCase().cachedIn(viewModelScope)
+    val trackList = filter.switchMap { it ->
+        getTrackListUseCase().cachedIn(viewModelScope)
+    }
+    
+    fun getTrackList(v: Int) {
+        filter.value = v
     }
 
     override fun favoriteClickEvent(questionId: Int) {

@@ -10,7 +10,7 @@ import com.watcha.domain.model.DomainTrackResponse
 import com.watcha.itunes.R
 import com.watcha.itunes.databinding.ItemListHomeBinding
 
-class TrackPagingDataAdapter :
+class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
     PagingDataAdapter<DomainTrackResponse, TrackPagingDataAdapter.TrackViewHolder>(
         HomeDiffUtil
     ) {
@@ -18,9 +18,8 @@ class TrackPagingDataAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(track: DomainTrackResponse) {
             binding.apply {
-                binding.apply {
-
-                }
+                this.track = track
+                onClickListener = viewModel
             }
         }
     }
@@ -50,7 +49,10 @@ class TrackPagingDataAdapter :
         override fun areItemsTheSame(oldItem: DomainTrackResponse, newItem: DomainTrackResponse) =
             oldItem.trackNumber == newItem.trackNumber
 
-        override fun areContentsTheSame(oldItem: DomainTrackResponse, newItem: DomainTrackResponse) =
+        override fun areContentsTheSame(
+            oldItem: DomainTrackResponse,
+            newItem: DomainTrackResponse
+        ) =
             oldItem == newItem
     }
 }

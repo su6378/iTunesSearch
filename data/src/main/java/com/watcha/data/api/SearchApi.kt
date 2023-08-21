@@ -13,5 +13,5 @@ interface SearchApi {
         @Query("entity") entity: String,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ): Response<List<TrackResponse>>
+    ): Response<TrackResponse>
 }

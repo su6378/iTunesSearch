@@ -20,5 +20,5 @@ internal class SearchRepositoryImpl @Inject constructor(
             enablePlaceholders = false
         ),
         pagingSourceFactory = { GetTrackListPagingSource(searchApi) }
-    ).flow
+    ).liveData
 }

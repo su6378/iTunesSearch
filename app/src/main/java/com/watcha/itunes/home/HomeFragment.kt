@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 private const val TAG = "HomeFragment_싸피"
+
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override val layoutResourceId: Int
@@ -21,24 +22,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override val viewModel: HomeViewModel by viewModels()
 
-    private val trackAdapter by lazy { TrackPagingDataAdapter() }
+    private val trackAdapter by lazy { TrackPagingDataAdapter(viewModel) }
 
     override fun initStartView() {
-
-    }
-
-    override fun initDataBinding() {
         binding.apply {
             initHomeAdapter()
         }
     }
 
-    override fun initAfterBinding() {
-        lifecycleScope.launch{
-            viewModel.getTrackList().collectLatest { data ->
-                trackAdapter.submitData(data)
-            }
+    override fun initDataBinding() {
+        viewModel.trackList.observe(viewLifecycleOwner) {
+            trackAdapter.submitData(this.lifecycle, it)
         }
+    }
+
+    override fun initAfterBinding() {
+        viewModel.getTrackList(1)
     }
 
     private fun initHomeAdapter() {

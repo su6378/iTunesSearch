@@ -10,7 +10,7 @@ import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val TAG = "GetTrackListPagingSourc_싸피"
+private const val TAG = "GetTrackListPagingSource_싸피"
 internal class GetTrackListPagingSource(
     private val searchApi: SearchApi
 ) : PagingSource<Int, DomainTrackResponse>() {
@@ -25,13 +25,13 @@ internal class GetTrackListPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DomainTrackResponse> {
         // LoadParams : 로드할 키와 항목 수 , LoadResult : 로드 작업의 결과
         return try {
+            Log.d(TAG, "load: 테스트")
             delay(500)
             // 키 값이 없을 경우 기본값을 사용함
             val currentPage = params.key ?: 1
             // 데이터를 제공하는 인스턴스의 메소드 사용
-            val response = searchApi.getTrackList("greenday", "song", 30, currentPage)
-            val data = response.body() ?: emptyList()
-            Log.d(TAG, "load: $data")
+            val response = searchApi.getTrackList("greenday", "song", 1, currentPage)
+            val data = response.body()?.results ?: emptyList()
             val responseData = mutableListOf<DomainTrackResponse>()
             responseData.addAll(data.map { it.toDomain() })
             /* 로드에 성공 시 LoadResult.Page 반환
