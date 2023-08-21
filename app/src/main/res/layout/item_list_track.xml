@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="track"
-            type="com.watcha.domain.model.DomainTrackResponse" />
+            type="com.watcha.domain.model.Track" />
 
         <variable
             name="onClickListener"
@@ -15,16 +16,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
         app:onSingleClick="@{() ->onClickListener.favoriteClickEvent(track.trackNumber)}">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/gray"
             app:cardCornerRadius="10dp"
-            app:cardElevation="10dp"
+            app:cardElevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,6 +40,7 @@
                     android:layout_height="120dp"
                     android:layout_marginVertical="20dp"
                     android:layout_marginStart="20dp"
+                    app:imgByUrl="@{track.artwork}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -49,11 +51,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="테스트"
-                    android:textSize="20sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingHorizontal="2dp"
+                    android:text="@{track.trackName}"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_track_image"
-                    app:layout_constraintTop_toTopOf="@id/iv_track_image"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_track_image" />
 
                 <TextView
                     android:id="@+id/tv_collection_name"
@@ -61,11 +68,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="컬렉션 네임"
-                    android:textSize="16sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingHorizontal="2dp"
+                    android:text="@{track.collectionName}"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_track_image"
-                    app:layout_constraintTop_toBottomOf="@id/tv_track_name"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_track_name" />
 
                 <TextView
                     android:id="@+id/tv_artist_name"
@@ -73,9 +84,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="아티스트 이름"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingHorizontal="2dp"
+                    android:text="@{track.artistName}"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_track_image"
-                    app:layout_constraintTop_toBottomOf="@id/tv_collection_name"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_collection_name" />
+
+                <ImageView
+                    android:id="@+id/iv_favorite"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/baseline_star_rate_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:tint="@color/white" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

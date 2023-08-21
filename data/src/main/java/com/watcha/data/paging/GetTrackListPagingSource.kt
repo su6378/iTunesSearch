@@ -5,16 +5,15 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.watcha.data.api.SearchApi
 import com.watcha.data.mapper.toDomain
-import com.watcha.domain.model.DomainTrackResponse
+import com.watcha.domain.model.Track
 import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val TAG = "GetTrackListPagingSource_싸피"
 internal class GetTrackListPagingSource(
     private val searchApi: SearchApi
-) : PagingSource<Int, DomainTrackResponse>() {
-    override fun getRefreshKey(state: PagingState<Int, DomainTrackResponse>): Int? {
+) : PagingSource<Int, Track>() {
+    override fun getRefreshKey(state: PagingState<Int, Track>): Int? {
         return state.anchorPosition?.let { achorPosition ->
             state.closestPageToPosition(achorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(achorPosition)?.nextKey?.minus(1)
@@ -22,17 +21,16 @@ internal class GetTrackListPagingSource(
     }
 
     // 데이터 로드
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DomainTrackResponse> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Track> {
         // LoadParams : 로드할 키와 항목 수 , LoadResult : 로드 작업의 결과
         return try {
-            Log.d(TAG, "load: 테스트")
             delay(500)
             // 키 값이 없을 경우 기본값을 사용함
-            val currentPage = params.key ?: 1
+            val currentPage = params.key ?: 0
             // 데이터를 제공하는 인스턴스의 메소드 사용
-            val response = searchApi.getTrackList("greenday", "song", 1, currentPage)
-            val data = response.body()?.results ?: emptyList()
-            val responseData = mutableListOf<DomainTrackResponse>()
+            val response = searchApi.getTrackList("greenday", "song", 30, currentPage)
+            val data = response.body()?.tracks ?: emptyList()
+            val responseData = mutableListOf<Track>()
             responseData.addAll(data.map { it.toDomain() })
             /* 로드에 성공 시 LoadResult.Page 반환
             data : 전송되는 데이터

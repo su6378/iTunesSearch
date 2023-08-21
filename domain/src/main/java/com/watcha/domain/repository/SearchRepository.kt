@@ -2,8 +2,8 @@ package com.watcha.domain.repository
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
-import com.watcha.domain.model.DomainTrackResponse
+import com.watcha.domain.model.Track
 
 interface SearchRepository {
-    fun getTrackList(): LiveData<PagingData<DomainTrackResponse>>
+    fun getTrackList(): LiveData<PagingData<Track>>
 }

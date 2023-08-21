@@ -32,6 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initDataBinding() {
         viewModel.trackList.observe(viewLifecycleOwner) {
+            Log.d(TAG, "initDataBinding: ${it}")
             trackAdapter.submitData(this.lifecycle, it)
         }
     }
@@ -51,8 +52,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
                 setHasFixedSize(true)
             }
+            Log.d(TAG, "initHomeAdapter: 테스트")
+            trackAdapter.addLoadStateListener { state ->
+                when(val result = state.source.refresh){
+                    is LoadState.Error -> {
+//                        hidLoading()
+                        val error = result.error
+//                        if( error is HttpException){
+//                            viewModel.handleError(error.code())
+//                        }
+                    }
 
-            trackAdapter.addLoadStateListener { combinedLoadStates ->
+                    is LoadState.Loading -> {
+//                        showLoading()
+                    }
+
+                    else -> {
+                        Log.d(TAG, "initHomeAdapter: 테스트2")
+//                        hidLoading()
+                    }
+                }
                 binding.apply {
 
 //                    lvHomeLoading.isVisible = combinedLoadStates.source.refresh is LoadState.Loading

@@ -1,5 +1,6 @@
 package com.watcha.data.api
 
+import com.watcha.data.model.SearchResponseDto
 import com.watcha.data.model.TrackResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,5 +14,5 @@ interface SearchApi {
         @Query("entity") entity: String,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ): Response<TrackResponse>
+    ): Response<SearchResponseDto>
 }

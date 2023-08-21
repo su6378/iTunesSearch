@@ -1,22 +1,23 @@
 package com.watcha.itunes.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.watcha.domain.model.DomainTrackResponse
+import com.watcha.domain.model.Track
 import com.watcha.itunes.R
-import com.watcha.itunes.databinding.ItemListHomeBinding
+import com.watcha.itunes.databinding.ItemListTrackBinding
 
 class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
-    PagingDataAdapter<DomainTrackResponse, TrackPagingDataAdapter.TrackViewHolder>(
+    PagingDataAdapter<Track, TrackPagingDataAdapter.TrackViewHolder>(
         HomeDiffUtil
     ) {
-    inner class TrackViewHolder(private val binding: ItemListHomeBinding) :
+    inner class TrackViewHolder(private val binding: ItemListTrackBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(track: DomainTrackResponse) {
+        fun bind(track: Track) {
             binding.apply {
                 this.track = track
                 onClickListener = viewModel
@@ -29,7 +30,7 @@ class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
         return TrackViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_list_home,
+                R.layout.item_list_track,
                 parent,
                 false
             )
@@ -45,13 +46,13 @@ class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
         }
     }
 
-    object HomeDiffUtil : DiffUtil.ItemCallback<DomainTrackResponse>() {
-        override fun areItemsTheSame(oldItem: DomainTrackResponse, newItem: DomainTrackResponse) =
+    object HomeDiffUtil : DiffUtil.ItemCallback<Track>() {
+        override fun areItemsTheSame(oldItem: Track, newItem: Track) =
             oldItem.trackNumber == newItem.trackNumber
 
         override fun areContentsTheSame(
-            oldItem: DomainTrackResponse,
-            newItem: DomainTrackResponse
+            oldItem: Track,
+            newItem: Track
         ) =
             oldItem == newItem
     }
