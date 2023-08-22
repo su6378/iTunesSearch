@@ -1,17 +1,16 @@
-package com.watcha.data.repository
+package com.watcha.data.repository.track.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.watcha.data.api.SearchApi
 import com.watcha.data.paging.GetTrackListPagingSource
-import com.watcha.domain.repository.SearchRepository
 import javax.inject.Inject
 
-internal class SearchRepositoryImpl @Inject constructor(
+internal class TrackRemoteDataSourceImpl @Inject constructor(
     private val searchApi: SearchApi
-) : SearchRepository {
-    override fun getTrackList() = Pager(
+): TrackRemoteDataSource {
+    override fun getTrackList() =  Pager(
         config = PagingConfig(
             pageSize = 1,
             enablePlaceholders = false

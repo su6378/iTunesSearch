@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         viewModel.homeSideEffects.observe(viewLifecycleOwner) {
             when (it) {
                 is HomeSideEffects.ClickFavoriteTrack -> {
-                    Log.d(TAG, "initDataBinding: 클릭됨 ${it.track.trackName}")
+                    viewModel.insertTrack()
                 }
             }
         }

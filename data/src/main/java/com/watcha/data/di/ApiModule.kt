@@ -1,6 +1,8 @@
 package com.watcha.data.di
 
 import com.watcha.data.api.SearchApi
+import com.watcha.data.repository.track.remote.TrackRemoteDataSource
+import com.watcha.data.repository.track.remote.TrackRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,5 +21,11 @@ internal object ApiModule {
         @Named("Retrofit") retrofit: Retrofit
     ) : SearchApi{
         return retrofit.create(SearchApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrackRemoteDataSource(searchApi: SearchApi): TrackRemoteDataSource{
+        return TrackRemoteDataSourceImpl(searchApi)
     }
 }

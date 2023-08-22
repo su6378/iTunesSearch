@@ -2,12 +2,12 @@ package com.watcha.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchResponseDto(
+internal data class SearchResponseDto(
     val resultCount: Int? = 0,
     @SerializedName("results") val tracks: List<TrackResponse>? = emptyList()
 )
 
-data class TrackResponse(
+internal data class TrackResponse(
     val artistId: Int? = 0,
     val artistName: String? = "",
     val artistViewUrl: String? = "",

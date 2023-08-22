@@ -1,7 +1,7 @@
 package com.watcha.data.di
 
-import com.watcha.data.repository.SearchRepositoryImpl
-import com.watcha.domain.repository.SearchRepository
+import com.watcha.data.repository.track.TrackRepositoryImpl
+import com.watcha.domain.repository.TrackRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +14,6 @@ internal abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindsSearchRepository(
-        searchRepository: SearchRepositoryImpl
-    ): SearchRepository
+        trackRepository: TrackRepositoryImpl
+    ): TrackRepository
 }

@@ -1,12 +1,11 @@
 package com.watcha.data.api
 
 import com.watcha.data.model.SearchResponseDto
-import com.watcha.data.model.TrackResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface SearchApi {
+internal interface SearchApi {
     // Search API
     @GET("search/")
     suspend fun getTrackList(

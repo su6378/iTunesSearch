@@ -83,14 +83,16 @@ lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 paging = { module = "androidx.paging:paging-runtime", version.ref = "androidxPaging" }
 
 # room (SQLite 추상화 라이브러리, 로컬 데이터베이스에 데이터를 저장)
-room = { module = "androidx.room:room-runtime", version.ref = "androidxRoom"}
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom"}
+room = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
 
 ## bundles는 여러 라이브러리를 한가지로 묶기 위함
 [bundles]
 androidx = ["androidx-core", "androidx-appcompat", "androidx-fragment-ktx", "androidx-lifecycle-extensions"]
 retrofit-bundles = ["retrofit", "retrofit-gson-converter"]
 okhttp3-bundles = ["okhttp3", "okhttp3-interceptor", "okhttp3-urlconnection", "okhttp3-logging"]
+room-bundles = ["room", "room-compiler", "room-ktx"]
 
 ## 안드로이드 플러그인 (프로젝트 단위의 gradle에 적용)
 [plugins]

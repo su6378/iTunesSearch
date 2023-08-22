@@ -45,6 +45,10 @@ dependencies {
 
     implementation libs.paging
 
+    implementation libs.room
+    kapt libs.room.compiler
+    implementation libs.room.ktx
+
     testImplementation libs.junit
     androidTestImplementation libs.android.test.junit
     androidTestImplementation libs.android.test.espresso
