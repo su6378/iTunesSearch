@@ -49,7 +49,6 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
      */
     private val mLoadingDialog: LoadingDialogFragment by lazy { LoadingDialogFragment() }
 
-
     private var toast: Toast? = null
 
     override fun onCreateView(
@@ -102,11 +101,11 @@ abstract class BaseFragment<T : ViewDataBinding, R : BaseViewModel> : Fragment()
 //            CustomToast.makeText(requireContext(), e?.cause?.message ?: "알 수 없는 에러가 발생했습니다.")?.apply { show() }
 //    }
 //
-//    // Toast Message 관련 함수
-//    fun toastMessage(message: String) {
-//        toast?.cancel()
-//        toast = CustomToast.makeText(requireContext(), message)?.apply { show() }
-//    }
+    // Toast Message 관련 함수
+    fun toastMessage(message: String) {
+        toast?.cancel()
+        toast = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).apply { show() }
+    }
 
     // 통신 에러 다이얼로그 생성
     fun showErrorDialog(

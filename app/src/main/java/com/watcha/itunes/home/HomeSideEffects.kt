@@ -1,8 +1,8 @@
 package com.watcha.itunes.home
 
-import com.watcha.domain.model.Track
+import com.watcha.itunes.model.TrackUiModel
 
 
 sealed class HomeSideEffects{
-    class ClickFavoriteTrack(val track: Track) : HomeSideEffects()
+    class ClickFavoriteTrack(val track: TrackUiModel) : HomeSideEffects()
 }

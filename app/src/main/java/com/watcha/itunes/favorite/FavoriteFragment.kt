@@ -1,58 +1,57 @@
 package com.watcha.itunes.favorite
 
-import android.util.Log
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.watcha.itunes.R
 import com.watcha.itunes.base.BaseFragment
 import com.watcha.itunes.databinding.FragmentFavoriteBinding
-import kotlinx.coroutines.Job
 import com.watcha.domain.Result
+import com.watcha.domain.model.Track
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "FavoriteFragment_싸피"
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel>() {
     override val layoutResourceId: Int
         get() = R.layout.fragment_favorite
 
     override val viewModel: FavoriteViewModel by viewModels()
-    private lateinit var job : Job
-    private val favoriteAdapter = FavoriteAdapter()
+
+    private lateinit var favoriteList: ArrayList<Track>
+    private val favoriteAdapter by lazy { FavoriteAdapter(viewModel) }
 
     override fun initStartView() {
-        collectFavoriteList()
-    }
-
-    override fun initDataBinding() {
-    }
-
-    override fun initAfterBinding() {
         initAdapter()
     }
 
-    private fun initAdapter(){
-        binding.apply {
-            rvFavorite.adapter = favoriteAdapter
+    override fun initDataBinding() {
+        viewModel.favoriteSideEffect.observe(viewLifecycleOwner) {
+            when (it) {
+                is FavoriteSideEffects.ClickDeleteFavoriteTrack -> {
+                    viewModel.deleteTrack(viewModel.deleteTrack.value!!.trackNumber)
+                }
+            }
+        }
+
+        viewModel.favoriteList.observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Success -> { // 데이터가 갱신될 때마다 adapter에 갱신
+                    favoriteAdapter.submitList(it.data)
+                }
+                is Result.Empty -> { // 데이터가 없으면 toast 메세지 출력
+                    favoriteAdapter.submitList(emptyList())
+                    toastMessage(resources.getString(R.string.content_no_data))
+                }
+                else -> {}
+            }
         }
     }
 
-    private fun jobUpdate(logic: () -> Unit){
-        job.cancel()
-        logic()
-        collectFavoriteList()
+    override fun initAfterBinding() {
+        favoriteList = arrayListOf()
     }
 
-    private fun collectFavoriteList(){
-        job = lifecycleScope.launchWhenStarted {
-            viewModel.favoriteList.collect {
-                if(it is Result.Success){
-                    favoriteAdapter.submitList(it.data)
-                    Log.d(TAG, "collectFavoriteList: ${it.data}")
-                }else{
-
-                }
-            }
+    private fun initAdapter() {
+        binding.apply {
+            rvFavorite.adapter = favoriteAdapter
         }
     }
 }

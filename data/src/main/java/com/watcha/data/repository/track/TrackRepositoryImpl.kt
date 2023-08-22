@@ -28,7 +28,6 @@ internal class TrackRepositoryImpl @Inject constructor(
 
     override fun checkFavoriteTrack(trackNumber: Int): Flow<Result<Int>> = flow {
         emit(Result.Loading)
-        Log.d(TAG, "checkFavoriteTrack: $trackNumber")
         trackLocalDataSource.checkFavoriteTrack(trackNumber).collect {
             emit(Result.Success(it))
         }
@@ -46,4 +45,6 @@ internal class TrackRepositoryImpl @Inject constructor(
     }.catch { e ->
         emit(Result.Error(e))
     }
+
+    override suspend fun deleteTrack(trackNumber: Int) = trackLocalDataSource.deleteTrack(trackNumber)
 }

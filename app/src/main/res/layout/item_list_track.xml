@@ -7,7 +7,7 @@
 
         <variable
             name="track"
-            type="com.watcha.domain.model.Track" />
+            type="com.watcha.itunes.model.TrackUiModel" />
 
         <variable
             name="onClickListener"

@@ -10,7 +10,7 @@ import com.watcha.domain.model.Track
 import com.watcha.itunes.R
 import com.watcha.itunes.databinding.ItemListFavoriteBinding
 
-class FavoriteAdapter : ListAdapter<Track, FavoriteAdapter.FavoriteHolder>(HomeDiffUtil) {
+class FavoriteAdapter(private val viewModel: FavoriteViewModel) : ListAdapter<Track, FavoriteAdapter.FavoriteHolder>(HomeDiffUtil) {
 
     inner class FavoriteHolder(private val binding: ItemListFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -18,6 +18,7 @@ class FavoriteAdapter : ListAdapter<Track, FavoriteAdapter.FavoriteHolder>(HomeD
         fun bind(data: Track) {
             with(binding) {
                 this.track = data
+                onClickListener = viewModel
             }
         }
     }

@@ -8,6 +8,10 @@
         <variable
             name="track"
             type="com.watcha.domain.model.Track" />
+
+        <variable
+            name="onClickListener"
+            type="com.watcha.itunes.favorite.FavoriteEventHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,6 +92,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_track_image"
                     app:layout_constraintTop_toBottomOf="@id/tv_collection_name" />
+
+                <ImageView
+                    android:id="@+id/iv_favorite"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/baseline_star_rate_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:onSingleClick="@{() ->onClickListener.deleteTrackClickEvent(track)}"
+                    app:tint="@color/red" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
