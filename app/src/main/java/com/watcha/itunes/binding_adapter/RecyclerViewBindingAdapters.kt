@@ -1,5 +1,9 @@
 package com.watcha.itunes.binding_adapter
 
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.watcha.itunes.home.TrackPagingDataAdapter
+
 object RecyclerViewBindingAdapters {
 //    @BindingAdapter("homes")
 //    @JvmStatic
@@ -9,4 +13,6 @@ object RecyclerViewBindingAdapters {
 //            bindAdapter.submitData(data)
 //        }
 //    }
+
+
 }
