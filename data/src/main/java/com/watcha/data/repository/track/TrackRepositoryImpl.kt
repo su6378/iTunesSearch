@@ -1,8 +1,5 @@
 package com.watcha.data.repository.track
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.paging.PagingData
 import com.watcha.data.mapper.toData
 import com.watcha.data.mapper.toDomain
 import com.watcha.data.repository.track.local.TrackLocalDataSource
@@ -15,15 +12,29 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-private const val TAG = "TrackRepositoryImpl_싸피"
 internal class TrackRepositoryImpl @Inject constructor(
     private val trackRemoteDataSource: TrackRemoteDataSource,
     private val trackLocalDataSource: TrackLocalDataSource
 ) : TrackRepository {
-    override fun getTrackList(): LiveData<PagingData<Track>> = trackRemoteDataSource.getTrackList()
 
-    override suspend fun insertTrack(track: Track) {
-        trackLocalDataSource.insertTrack(track.toData())
+    override fun getTrackList(offset: Int): Flow<Result<List<Track>>> = flow {
+        emit(Result.Loading)
+
+        trackRemoteDataSource.getTrackList(offset).collect { response ->
+            if (response.resultCount > 0) emit(Result.Success(response.tracks!!.map { it.toDomain() }))
+            else emit(Result.Empty)
+        }
+    }.catch { e ->
+        emit(Result.Error(e))
+    }
+
+    override suspend fun insertTrack(tracks: List<Track>) {
+        val list = tracks.map { it.toData() }.toTypedArray()
+        trackLocalDataSource.insertTrack(*list)
+    }
+
+    override suspend fun insertFavoriteTrack(track: Track) {
+        trackLocalDataSource.insertFavoriteTrack(track.toData())
     }
 
     override fun checkFavoriteTrack(trackNumber: Int): Flow<Result<Int>> = flow {
@@ -38,7 +49,7 @@ internal class TrackRepositoryImpl @Inject constructor(
     override fun getAllTrack(): Flow<Result<List<Track>>> = flow {
         emit(Result.Loading)
 
-        trackLocalDataSource.getAllTrack().collect{ list ->
+        trackLocalDataSource.getAllTrack().collect { list ->
             if (list.isEmpty()) emit(Result.Empty)
             else emit(Result.Success(list.map { it.toDomain() }))
         }
@@ -46,5 +57,17 @@ internal class TrackRepositoryImpl @Inject constructor(
         emit(Result.Error(e))
     }
 
-    override suspend fun deleteTrack(trackNumber: Int) = trackLocalDataSource.deleteTrack(trackNumber)
+    override fun getAllFavoriteTrack(): Flow<Result<List<Track>>> = flow {
+        emit(Result.Loading)
+
+        trackLocalDataSource.getAllFavoriteTrack().collect() { list ->
+            if (list.isEmpty()) emit(Result.Empty)
+            else emit(Result.Success(list.map { it.toDomain() }))
+        }
+    }.catch { e ->
+        emit(Result.Error(e))
+    }
+
+    override suspend fun deleteTrack(trackNumber: Int) =
+        trackLocalDataSource.deleteTrack(trackNumber)
 }

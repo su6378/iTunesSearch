@@ -7,7 +7,7 @@
 
         <variable
             name="track"
-            type="com.watcha.itunes.model.TrackUiModel" />
+            type="com.watcha.domain.model.Track" />
 
         <variable
             name="onClickListener"
@@ -103,7 +103,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:onSingleClick="@{() ->onClickListener.favoriteClickEvent(track)}"
-                    app:tint="@color/white" />
+                    app:starTint="@{String.valueOf(track.isFavorite)}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

@@ -1,7 +1,6 @@
 package com.watcha.itunes.home
 
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,12 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.watcha.domain.model.Track
 import com.watcha.itunes.R
 import com.watcha.itunes.databinding.ItemListTrackBinding
-import com.watcha.itunes.mapper.toUi
-import com.watcha.itunes.model.TrackUiModel
 
 private const val TAG = "TrackPagingDataAdapter_싸피"
 
-class TrackPagingDataAdapter(private val viewModel: HomeViewModel, private val favoriteList: List<Track>) :
+class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
     PagingDataAdapter<Track, TrackPagingDataAdapter.TrackViewHolder>(
         HomeDiffUtil
     ) {
@@ -26,7 +23,7 @@ class TrackPagingDataAdapter(private val viewModel: HomeViewModel, private val f
         fun bind(track: Track) {
             binding.apply {
 //                Log.d(TAG, "bind: $favoriteList")
-                this.track = track.toUi(true)
+                this.track = track
                 onClickListener = viewModel
                 ivFavorite.imageTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(

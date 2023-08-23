@@ -1,9 +1,8 @@
 package com.watcha.data.repository.track.remote
 
-import androidx.lifecycle.LiveData
-import androidx.paging.PagingData
-import com.watcha.domain.model.Track
+import com.watcha.data.model.SearchResponseDto
+import kotlinx.coroutines.flow.Flow
 
 internal interface TrackRemoteDataSource{
-    fun getTrackList(): LiveData<PagingData<Track>>
+    fun getTrackList(offset: Int): Flow<SearchResponseDto>
 }

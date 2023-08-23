@@ -3,7 +3,7 @@ package com.watcha.data.model
 import com.google.gson.annotations.SerializedName
 
 internal data class SearchResponseDto(
-    val resultCount: Int? = 0,
+    val resultCount: Int = 0,
     @SerializedName("results") val tracks: List<TrackResponse>? = emptyList()
 )
 

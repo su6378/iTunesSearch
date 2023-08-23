@@ -1,11 +1,10 @@
 package com.watcha.domain.usecase.track
 
-import com.watcha.domain.model.Track
 import com.watcha.domain.repository.TrackRepository
 import javax.inject.Inject
 
-class InsertTrackUseCase @Inject constructor(
+class GetAllFavoriteTrackUseCase @Inject constructor(
     private val trackRepository: TrackRepository
 ) {
-    suspend operator fun invoke(tracks: List<Track>) = trackRepository.insertTrack(tracks)
+    operator fun invoke() = trackRepository.getAllFavoriteTrack()
 }

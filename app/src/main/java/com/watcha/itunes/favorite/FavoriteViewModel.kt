@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.watcha.domain.Result
 import com.watcha.domain.model.Track
 import com.watcha.domain.usecase.track.DeleteTrackUseCase
-import com.watcha.domain.usecase.track.GetAllTrackUseCase
+import com.watcha.domain.usecase.track.GetAllFavoriteTrackUseCase
 import com.watcha.itunes.base.BaseViewModel
 import com.watcha.itunes.common.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    private val getAllTrackUseCase: GetAllTrackUseCase,
+    private val getAllFavoriteTrackUseCase: GetAllFavoriteTrackUseCase,
     private val deleteTrackUseCase: DeleteTrackUseCase
 ) : BaseViewModel(), FavoriteEventHandler {
 
@@ -29,7 +29,7 @@ class FavoriteViewModel @Inject constructor(
     val deleteTrack: LiveData<Track> get() = _deleteTrack
 
     var favoriteList =
-        getAllTrackUseCase()
+        getAllFavoriteTrackUseCase()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),

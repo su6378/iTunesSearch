@@ -4,8 +4,8 @@ import com.watcha.domain.model.Track
 import com.watcha.domain.repository.TrackRepository
 import javax.inject.Inject
 
-class InsertTrackUseCase @Inject constructor(
+class InsertFavoriteTrackUseCase @Inject constructor(
     private val trackRepository: TrackRepository
 ) {
-    suspend operator fun invoke(tracks: List<Track>) = trackRepository.insertTrack(tracks)
+    suspend operator fun invoke(track: Track) = trackRepository.insertFavoriteTrack(track)
 }

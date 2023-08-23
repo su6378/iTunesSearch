@@ -103,7 +103,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:onSingleClick="@{() ->onClickListener.deleteTrackClickEvent(track)}"
-                    app:tint="@color/red" />
+                    app:starTint="@{String.valueOf(track.isFavorite)}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

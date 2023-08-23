@@ -8,10 +8,14 @@ import javax.inject.Inject
 internal class TrackLocalDataSourceImpl @Inject constructor(
     private val trackDao: TrackDao
 ) : TrackLocalDataSource {
-    override suspend fun insertTrack(track: TrackEntity) = trackDao.insertTrack(track)
+    override suspend fun insertTrack(vararg tracks: TrackEntity) = trackDao.insertTrack(*tracks)
+    override suspend fun insertFavoriteTrack(track: TrackEntity) =
+        trackDao.insertFavoriteTrack(track)
+
     override fun checkFavoriteTrack(trackNumber: Int): Flow<Int> =
         trackDao.checkFavoriteTrack(trackNumber)
 
     override fun getAllTrack(): Flow<List<TrackEntity>> = trackDao.getAllTrack()
+    override fun getAllFavoriteTrack(): Flow<List<TrackEntity>> = trackDao.getAllFavoriteTrack()
     override suspend fun deleteTrack(trackNumber: Int) = trackDao.deleteTrack(trackNumber)
 }

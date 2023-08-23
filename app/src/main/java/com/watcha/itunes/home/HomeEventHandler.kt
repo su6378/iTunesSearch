@@ -1,7 +1,7 @@
 package com.watcha.itunes.home
 
-import com.watcha.itunes.model.TrackUiModel
+import com.watcha.domain.model.Track
 
 interface HomeEventHandler {
-    fun favoriteClickEvent(track: TrackUiModel)
+    fun favoriteClickEvent(track: Track)
 }

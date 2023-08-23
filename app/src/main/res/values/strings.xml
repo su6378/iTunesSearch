@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">iTunesSearch</string>
     <string name="content_no_data">즐겨찾기 한 트랙이 없습니다.</string>
+    <string name="content_error">에러가 발생했습니다 다시 시도해 주세요.</string>
 </resources>

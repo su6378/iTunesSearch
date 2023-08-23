@@ -1,13 +1,15 @@
 package com.watcha.itunes.binding_adapter
 
+import android.content.res.ColorStateList
+import android.util.Log
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.watcha.itunes.home.TrackPagingDataAdapter
+import com.watcha.itunes.R
 
+private const val TAG = "ImageBindingAdapters_싸피"
 // 이미지 관련 데이터 바인딩
 object ImageBindingAdapters {
     @JvmStatic
@@ -19,9 +21,11 @@ object ImageBindingAdapters {
             .into(this)
     }
 
-    @BindingAdapter("app:starVisible")
+    @BindingAdapter("app:starTint")
     @JvmStatic
-    fun ImageView.bindStarVisible(state: String){
-        this.isVisible = state == "1"
+    fun ImageView.bindStarTint(state: String){
+        Log.d(TAG, "bindStarVisible: $state")
+        imageTintList = if (state == "0") ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.white))
+        else ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.yellow))
     }
 }

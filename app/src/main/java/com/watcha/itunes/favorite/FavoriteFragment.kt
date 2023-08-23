@@ -5,7 +5,6 @@ import com.watcha.itunes.R
 import com.watcha.itunes.base.BaseFragment
 import com.watcha.itunes.databinding.FragmentFavoriteBinding
 import com.watcha.domain.Result
-import com.watcha.domain.model.Track
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +14,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
 
     override val viewModel: FavoriteViewModel by viewModels()
 
-    private lateinit var favoriteList: ArrayList<Track>
     private val favoriteAdapter by lazy { FavoriteAdapter(viewModel) }
 
     override fun initStartView() {
@@ -45,9 +43,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         }
     }
 
-    override fun initAfterBinding() {
-        favoriteList = arrayListOf()
-    }
+    override fun initAfterBinding() {}
 
     private fun initAdapter() {
         binding.apply {
