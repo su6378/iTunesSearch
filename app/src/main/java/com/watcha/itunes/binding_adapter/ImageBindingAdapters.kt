@@ -21,6 +21,7 @@ object ImageBindingAdapters {
     @BindingAdapter("app:starTint")
     @JvmStatic
     fun ImageView.bindStarTint(state: String){
+        // state -> 별 이미지 색상 지정
         imageTintList = if (state == "0") ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.white))
         else ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.yellow))
     }

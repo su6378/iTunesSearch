@@ -12,7 +12,6 @@ androidxFragment = "1.5.0"
 androidxLifecycleExtension = "2.2.0"
 androidxRoom = "2.5.0"
 androidxPaging = "3.1.1"
-#databinding_version = "7.3.1"
 
 # android
 androidMaterial = "1.7.0"
@@ -54,10 +53,6 @@ android-test-espresso = { module = "androidx.test.espresso:espresso-core", versi
 # hilt (DI)
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-
-# Jetpack Databinding (모델과 뷰 사이의 데이터 바인딩)
-#databinding = { module = "androidx.databinding:databinding-runtime", version.ref = "databinding_version" }
-#databinding_compiler = { module = "com.android.databinding:compiler", version.ref = "databinding_version" }
 
 # Jetpack ViewModel (생명주기에 따른 관리)
 androidx-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidxLifecycleExtension" }

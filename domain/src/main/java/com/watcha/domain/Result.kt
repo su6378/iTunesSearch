@@ -2,6 +2,7 @@ package com.watcha.domain
 
 import java.io.IOException
 
+// remote or local state
 sealed class Result<out T> {
     object Uninitialized : Result<Nothing>()
 

@@ -1,4 +1,4 @@
-package com.watcha.data.paging
+package com.watcha.data.repository.track.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

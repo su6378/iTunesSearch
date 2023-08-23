@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.watcha.data.mapper.toData
 import com.watcha.data.mapper.toDomain
-import com.watcha.data.paging.GetTrackListPagingSource
+import com.watcha.data.repository.track.paging.GetTrackListPagingSource
 import com.watcha.data.repository.track.local.TrackLocalDataSource
 import com.watcha.data.repository.track.remote.TrackRemoteDataSource
 import com.watcha.domain.Result

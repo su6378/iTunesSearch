@@ -14,7 +14,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         get() = R.layout.activity_main
 
     override fun initStartView() {
-        supportFragmentManager.beginTransaction().add(R.id.fcv_main, HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fcv_main, HomeFragment()).commit() // 바텀 네비게이션 DEFAULT 설정
     }
 
     override fun initDataBinding() {
@@ -22,7 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initAfterBinding() {
         binding.apply {
-            bnMain.setOnItemSelectedListener {
+            bnMain.setOnItemSelectedListener { // 바텀 네이게이션 화면 이동
                 when (it.itemId) {
                     R.id.menu_home -> replaceFragment(HomeFragment())
                     R.id.menu_favorites -> replaceFragment(FavoriteFragment())

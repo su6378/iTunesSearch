@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                     // 요청할 데이터가 없는 경우
                     if (combinedLoadStates.source.append.endOfPaginationReached) {
                         toastMessage(resources.getString(R.string.content_last_data))
-                    } else if (combinedLoadStates.source.refresh is LoadState.Error) {
+                    } else if (combinedLoadStates.source.refresh is LoadState.Error) { // 에러 발생시
                         toastMessage(resources.getString(R.string.content_error))
                     }
                 }
