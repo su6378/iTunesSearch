@@ -25,12 +25,6 @@ class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
 //                Log.d(TAG, "bind: $favoriteList")
                 this.track = track
                 onClickListener = viewModel
-                ivFavorite.imageTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.purple_700
-                    )
-                )
             }
         }
     }

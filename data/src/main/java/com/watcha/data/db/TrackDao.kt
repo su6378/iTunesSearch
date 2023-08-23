@@ -1,5 +1,6 @@
 package com.watcha.data.db
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.watcha.data.model.TrackEntity
 import kotlinx.coroutines.flow.Flow
@@ -25,4 +26,7 @@ interface TrackDao {
     // 르랙 수정 (Favorite 등록 or 삭제)
     @Update()
     suspend fun updateTrack(track: TrackEntity)
+
+    @Query("SELECT * FROM track_table WHERE offset BETWEEN :start AND :end")
+    fun getTracksByOffset(start: Int, end: Int): List<TrackEntity>?
 }
