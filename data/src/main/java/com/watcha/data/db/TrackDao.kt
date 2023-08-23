@@ -25,8 +25,4 @@ interface TrackDao {
     // 르랙 수정 (Favorite 등록 or 삭제)
     @Update()
     suspend fun updateTrack(track: TrackEntity)
-
-    // Favorite Track 삭제
-    @Query("DELETE FROM track_table WHERE trackNumber = :trackNumber")
-    suspend fun deleteTrack(trackNumber: Int)
 }

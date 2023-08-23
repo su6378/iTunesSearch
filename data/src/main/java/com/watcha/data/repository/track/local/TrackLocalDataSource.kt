@@ -9,5 +9,4 @@ internal interface TrackLocalDataSource {
    fun getAllTrack(start: Int, end: Int): Flow<List<TrackEntity>>
    fun getAllFavoriteTrack(): Flow<List<TrackEntity>>
    suspend fun updateTrack(track: TrackEntity)
-   suspend fun deleteTrack(trackNumber: Int)
 }

@@ -17,5 +17,4 @@ internal class TrackLocalDataSourceImpl @Inject constructor(
 
     override fun getAllFavoriteTrack(): Flow<List<TrackEntity>> = trackDao.getAllFavoriteTrack()
     override suspend fun updateTrack(track: TrackEntity) = trackDao.updateTrack(track)
-    override suspend fun deleteTrack(trackNumber: Int) = trackDao.deleteTrack(trackNumber)
 }

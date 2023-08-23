@@ -26,7 +26,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel
         viewModel.favoriteSideEffect.observe(viewLifecycleOwner) {
             when (it) {
                 is FavoriteSideEffects.ClickDeleteFavoriteTrack -> {
-                    viewModel.deleteTrack(viewModel.deleteTrack.value!!.trackNumber)
+                    viewModel.updateTrack()
                 }
             }
         }

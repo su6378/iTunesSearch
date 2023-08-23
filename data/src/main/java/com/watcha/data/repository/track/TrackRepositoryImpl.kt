@@ -1,6 +1,5 @@
 package com.watcha.data.repository.track
 
-import android.util.Log
 import com.watcha.data.mapper.toData
 import com.watcha.data.mapper.toDomain
 import com.watcha.data.repository.track.local.TrackLocalDataSource
@@ -71,7 +70,4 @@ internal class TrackRepositoryImpl @Inject constructor(
     }
 
     override suspend fun update(track: Track) = trackLocalDataSource.updateTrack(track.toData())
-
-    override suspend fun deleteTrack(trackNumber: Int) =
-        trackLocalDataSource.deleteTrack(trackNumber)
 }

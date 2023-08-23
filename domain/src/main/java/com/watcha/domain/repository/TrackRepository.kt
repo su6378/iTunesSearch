@@ -11,5 +11,4 @@ interface TrackRepository {
     fun getAllTrack(offset: Int): Flow<Result<List<Track>>>
     fun getAllFavoriteTrack(): Flow<Result<List<Track>>>
     suspend fun update(track: Track)
-    suspend fun deleteTrack(trackNumber: Int)
 }
