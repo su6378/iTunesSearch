@@ -28,7 +28,7 @@ internal class GetTrackListPagingSource @Inject constructor(
         // LoadParams : 로드할 키와 항목 수 , LoadResult : 로드 작업의 결과
         return try {
             // 로딩 애니메이션 효과를 위해 지연
-            if (params.key == null) delay(3000)
+            if (params.key == null) delay(2000)
             else delay(1500)
 
             // 키 값이 없을 경우 기본값을 사용함
@@ -38,10 +38,10 @@ internal class GetTrackListPagingSource @Inject constructor(
             var response = trackDao.getTracksByOffset(currentPage, currentPage + 29) ?: emptyList()
             val responseData = mutableListOf<Track>()
 
-            var nextKey : Int?
+            var nextKey: Int?
 
             if (response.isEmpty()) { // Local DB에 없는 경우 -> search API 요청
-                val remoteResponse = searchApi.getTrackList("NewJeans", "song", 30, currentPage)
+                val remoteResponse = searchApi.getTrackList("greenday", "song", 30, currentPage)
                 if (remoteResponse.resultCount > 0) { // iTunes search API 데이터가 있는 경우
                     // Local DB에 데이터 삽입
                     val list = remoteResponse.tracks!!.mapIndexed { index, trackResponse ->
@@ -50,15 +50,15 @@ internal class GetTrackListPagingSource @Inject constructor(
                     trackDao.insertTrack(*list)
 
                     responseData.addAll(
-                        searchApi.getTrackList(
-                            "NewJeans",
-                            "song",
-                            30,
-                            currentPage
-                        ).tracks!!.mapIndexed { index, trackResponse -> trackResponse.toDomain(index + currentPage) }
+                        remoteResponse.tracks!!.mapIndexed { index, trackResponse ->
+                            trackResponse.toDomain(
+                                index + currentPage
+                            )
+                        }
                     )
+
                     nextKey = list.last().offset + 1
-                }else nextKey = null // remote, local 둘 다 데이터가 없는 경우
+                } else nextKey = null // remote, local 둘 다 데이터가 없는 경우
             } else { // Local DB에 있는 데이터 삽입
                 responseData.addAll(response.map { it.toDomain() })
                 nextKey = response.last().offset + 1
