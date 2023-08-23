@@ -7,9 +7,6 @@ import com.watcha.domain.Result
 
 interface TrackRepository {
     fun getTrackList(offset: Int): Flow<Result<List<Track>>>
-    suspend fun insertTrack(tracks: List<Track>)
-    fun checkFavoriteTrack(trackNumber: Int): Flow<Result<Int>>
-    fun getAllTrack(offset: Int): Flow<Result<List<Track>>>
     fun getAllFavoriteTrack(): Flow<Result<List<Track>>>
     suspend fun update(track: Track)
     fun getTracksByOffset(): Flow<PagingData<Track>>

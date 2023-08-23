@@ -38,31 +38,6 @@ internal class TrackRepositoryImpl @Inject constructor(
         emit(Result.Error(e))
     }
 
-    override suspend fun insertTrack(tracks: List<Track>) {
-        val list = tracks.map { it.toData() }.toTypedArray()
-        trackLocalDataSource.insertTrack(*list)
-    }
-
-    override fun checkFavoriteTrack(trackNumber: Int): Flow<Result<Int>> = flow {
-        emit(Result.Loading)
-        trackLocalDataSource.checkFavoriteTrack(trackNumber).collect {
-            emit(Result.Success(it))
-        }
-    }.catch { e ->
-        emit(Result.Error(e))
-    }
-
-    override fun getAllTrack(offset: Int): Flow<Result<List<Track>>> = flow {
-        emit(Result.Loading)
-
-        trackLocalDataSource.getAllTrack(offset, offset + 29).collect { list ->
-            if (list.isEmpty()) emit(Result.Empty)
-            else emit(Result.Success(list.map { it.toDomain() }))
-        }
-    }.catch { e ->
-        emit(Result.Error(e))
-    }
-
     override fun getAllFavoriteTrack(): Flow<Result<List<Track>>> = flow {
         emit(Result.Loading)
 
