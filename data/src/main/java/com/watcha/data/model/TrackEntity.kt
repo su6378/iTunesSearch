@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "track_table")
 data class TrackEntity(
-    @PrimaryKey(autoGenerate = true) // 자동으로 id 번호 증가
-    var id: Int = 0,
+    @PrimaryKey
+    var offset: Int = 0,
     var trackNumber: Int = 0,
     var trackName: String? = "",
     var collectionName: String? = "",

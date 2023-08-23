@@ -1,5 +1,6 @@
 package com.watcha.data.repository.track
 
+import android.util.Log
 import com.watcha.data.mapper.toData
 import com.watcha.data.mapper.toDomain
 import com.watcha.data.repository.track.local.TrackLocalDataSource
@@ -21,8 +22,13 @@ internal class TrackRepositoryImpl @Inject constructor(
         emit(Result.Loading)
 
         trackRemoteDataSource.getTrackList(offset).collect { response ->
-            if (response.resultCount > 0) emit(Result.Success(response.tracks!!.map { it.toDomain() }))
-            else emit(Result.Empty)
+            if (response.resultCount > 0) {
+                emit(Result.Success(response.tracks!!.mapIndexed { index, trackResponse ->
+                    trackResponse.toDomain(
+                        offset + index
+                    )
+                }))
+            } else emit(Result.Empty)
         }
     }.catch { e ->
         emit(Result.Error(e))
@@ -31,10 +37,6 @@ internal class TrackRepositoryImpl @Inject constructor(
     override suspend fun insertTrack(tracks: List<Track>) {
         val list = tracks.map { it.toData() }.toTypedArray()
         trackLocalDataSource.insertTrack(*list)
-    }
-
-    override suspend fun insertFavoriteTrack(track: Track) {
-        trackLocalDataSource.insertFavoriteTrack(track.toData())
     }
 
     override fun checkFavoriteTrack(trackNumber: Int): Flow<Result<Int>> = flow {
@@ -46,10 +48,10 @@ internal class TrackRepositoryImpl @Inject constructor(
         emit(Result.Error(e))
     }
 
-    override fun getAllTrack(): Flow<Result<List<Track>>> = flow {
+    override fun getAllTrack(offset: Int): Flow<Result<List<Track>>> = flow {
         emit(Result.Loading)
 
-        trackLocalDataSource.getAllTrack().collect { list ->
+        trackLocalDataSource.getAllTrack(offset, offset + 29).collect { list ->
             if (list.isEmpty()) emit(Result.Empty)
             else emit(Result.Success(list.map { it.toDomain() }))
         }
@@ -67,6 +69,8 @@ internal class TrackRepositoryImpl @Inject constructor(
     }.catch { e ->
         emit(Result.Error(e))
     }
+
+    override suspend fun update(track: Track) = trackLocalDataSource.updateTrack(track.toData())
 
     override suspend fun deleteTrack(trackNumber: Int) =
         trackLocalDataSource.deleteTrack(trackNumber)

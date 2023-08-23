@@ -1,10 +1,8 @@
 package com.watcha.itunes.binding_adapter
 
 import android.content.res.ColorStateList
-import android.util.Log
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.watcha.itunes.R
@@ -24,7 +22,6 @@ object ImageBindingAdapters {
     @BindingAdapter("app:starTint")
     @JvmStatic
     fun ImageView.bindStarTint(state: String){
-        Log.d(TAG, "bindStarVisible: $state")
         imageTintList = if (state == "0") ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.white))
         else ColorStateList.valueOf(ContextCompat.getColor(this.context, R.color.yellow))
     }

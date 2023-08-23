@@ -10,6 +10,6 @@ internal class TrackRemoteDataSourceImpl @Inject constructor(
     private val searchApi: SearchApi
 ) : TrackRemoteDataSource {
     override fun getTrackList(offset: Int): Flow<SearchResponseDto> = flow {
-        emit(searchApi.getTrackList("greenday", "song", 30, offset))
+        emit(searchApi.getTrackList("NewJeans", "song", 30, offset))
     }
 }

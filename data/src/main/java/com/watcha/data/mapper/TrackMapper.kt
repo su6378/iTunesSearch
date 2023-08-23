@@ -4,7 +4,8 @@ import com.watcha.data.model.TrackEntity
 import com.watcha.data.model.TrackResponse
 import com.watcha.domain.model.Track
 
-internal fun TrackResponse.toDomain() = Track(
+internal fun TrackResponse.toDomain(offset: Int) = Track(
+    offset = offset,
     trackNumber = this.trackNumber ?: 0,
     trackName = this.trackName ?: "",
     collectionName = this.collectionName ?: "",
@@ -13,6 +14,7 @@ internal fun TrackResponse.toDomain() = Track(
 )
 
 internal fun TrackEntity.toDomain() = Track(
+    offset = this.offset,
     trackNumber = this.trackNumber,
     trackName = this.trackName ?: "",
     collectionName = this.collectionName ?: "",
@@ -22,6 +24,7 @@ internal fun TrackEntity.toDomain() = Track(
 )
 
 internal fun Track.toData() = TrackEntity(
+    offset = this.offset,
     trackNumber = this.trackNumber,
     trackName = this.trackName ?: "",
     collectionName = this.collectionName ?: "",

@@ -1,5 +1,6 @@
 package com.watcha.itunes.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,7 @@ import com.watcha.domain.model.Track
 import com.watcha.itunes.R
 import com.watcha.itunes.databinding.ItemListTrackBinding
 
+private const val TAG = "HomeAdapter_싸피"
 class HomeAdapter(private val viewModel: HomeViewModel) : ListAdapter<Track, HomeAdapter.TrackHolder>(HomeDiffUtil) {
 
     inner class TrackHolder(private val binding: ItemListTrackBinding) :
@@ -19,6 +21,7 @@ class HomeAdapter(private val viewModel: HomeViewModel) : ListAdapter<Track, Hom
             with(binding) {
                 this.track = data
                 onClickListener = viewModel
+                Log.d(TAG, "bind: $layoutPosition")
             }
         }
     }

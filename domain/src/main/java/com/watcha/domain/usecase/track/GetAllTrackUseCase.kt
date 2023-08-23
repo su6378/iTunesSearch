@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetAllTrackUseCase @Inject constructor(
     private val trackRepository: TrackRepository
 ) {
-    operator fun invoke() = trackRepository.getAllTrack()
+    operator fun invoke(offset: Int) = trackRepository.getAllTrack(offset)
 }
