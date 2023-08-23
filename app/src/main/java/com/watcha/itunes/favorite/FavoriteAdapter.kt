@@ -44,7 +44,7 @@ class FavoriteAdapter(private val viewModel: FavoriteViewModel) : ListAdapter<Tr
 
     object HomeDiffUtil : DiffUtil.ItemCallback<Track>() {
         override fun areItemsTheSame(oldItem: Track, newItem: Track): Boolean {
-            return oldItem.trackNumber == newItem.trackNumber
+            return oldItem.offset == newItem.offset
         }
 
         override fun areContentsTheSame(oldItem: Track, newItem: Track): Boolean {

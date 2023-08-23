@@ -7,7 +7,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.watcha.itunes.R
 
-private const val TAG = "ImageBindingAdapters_싸피"
 // 이미지 관련 데이터 바인딩
 object ImageBindingAdapters {
     @JvmStatic

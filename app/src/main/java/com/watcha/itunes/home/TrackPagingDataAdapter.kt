@@ -1,9 +1,7 @@
 package com.watcha.itunes.home
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -11,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.watcha.domain.model.Track
 import com.watcha.itunes.R
 import com.watcha.itunes.databinding.ItemListTrackBinding
-
-private const val TAG = "TrackPagingDataAdapter_싸피"
 
 class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
     PagingDataAdapter<Track, TrackPagingDataAdapter.TrackViewHolder>(
@@ -22,7 +18,6 @@ class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(track: Track) {
             binding.apply {
-//                Log.d(TAG, "bind: $favoriteList")
                 this.track = track
                 onClickListener = viewModel
             }
@@ -52,7 +47,7 @@ class TrackPagingDataAdapter(private val viewModel: HomeViewModel) :
 
     object HomeDiffUtil : DiffUtil.ItemCallback<Track>() {
         override fun areItemsTheSame(oldItem: Track, newItem: Track) =
-            oldItem.trackNumber == newItem.trackNumber
+            oldItem.offset == newItem.offset
 
         override fun areContentsTheSame(
             oldItem: Track,
